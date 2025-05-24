@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sayı Tahmin Oyunu</title>
+</head>
+<body>
+  <h1>Sayı Tahmin Etme Oyunu</h1>
+  <p>1 ile 100 arasında bir sayı tuttum. Tahmin etmeye çalış!</p>
+  <input type="number" id="tahmin" placeholder="Tahminini gir">
+  <button onclick="tahminEt()">Tahmin Et</button>
+  <p id="sonuc"></p>
+  <p id="hak"></p>
+
+  <script>
+    const tutulanSayi = Math.floor(Math.random() * 100) + 1;
+    let kalanHak = 10;
+
+    function tahminEt() {
+      const tahmin = parseInt(document.getElementById(\"tahmin\").value);
+      const sonuc = document.getElementById(\"sonuc\");
+      const hak = document.getElementById(\"hak\");
+
+      if (isNaN(tahmin) || tahmin < 1 || tahmin > 100) {
+        sonuc.innerText = \"1 ile 100 arasında bir sayı girmelisin!\";
+        return;
+      }
+
+      kalanHak--;
+
+      if (tahmin === tutulanSayi) {
+        sonuc.innerText = `Tebrikler! Doğru tahmin. Sayı: ${tutulanSayi}`;
+      } else if (kalanHak === 0) {
+        sonuc.innerText = `Hakkın bitti! Doğru sayı: ${tutulanSayi}`;
+      } else if (tahmin < tutulanSayi) {
+        sonuc.innerText = \"Daha büyük bir sayı dene.\";
+      } else {
+        sonuc.innerText = \"Daha küçük bir sayı dene.\";
+      }
+
+      hak.innerText = `Kalan tahmin hakkın: ${kalanHak}`;
+    }
+  </script>
+</body>
+</html>
